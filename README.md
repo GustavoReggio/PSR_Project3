@@ -1,5 +1,6 @@
 # PSR_Project3
 Terceiro trabalho de PSR
+[![NPM](https://img.shields.io/npm/1/react)](https://github.com/GustavoReggio/PSR_Project3/blob/main/LICENSE)
 ## Group members - G3
 
 |  Num Mec | Nome                | email                   |
@@ -24,6 +25,6 @@ Terceiro trabalho de PSR
  ```
 
 
-## Link References
+## Bibliografia
  - https://www.w3schools.com/c/c_structs.php
  - 
