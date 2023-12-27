@@ -2,7 +2,7 @@
 Terceiro trabalho de PSR
 ## Group members - G3
 
-|  NMec | Name                | email                   |
+|  Num Mec | Nome                | email                   |
 | ----: | ------------------- | ----------------------- |
 | 118485|   Gustavo Reggio    |  gustavo.reggio@ua.pt   |  
 | 105037|   Gonçalo Ornelas   |  goncalo.ornelas0@ua.pt |
@@ -26,4 +26,4 @@ Terceiro trabalho de PSR
 
 ## Link References
  - https://www.w3schools.com/c/c_structs.php
- - https://en.wikipedia.org/wiki/Pointer_(computer_programming)
+ - 
