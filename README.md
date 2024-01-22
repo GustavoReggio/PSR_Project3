@@ -26,5 +26,6 @@ Terceiro trabalho de PSR
 
 
 ## Bibliografia
- - https://www.w3schools.com/c/c_structs.php
- - 
+ - https://www.w3schools.com/git/default.asp
+ - https://www.w3schools.com/xml/dom_nodes.asp
+ - https://opencv.org/
