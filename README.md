@@ -1,7 +1,7 @@
 # PSR_Project3
 Terceiro trabalho de PSR
 [![NPM](https://img.shields.io/badge/:badgeContent)](https://github.com/GustavoReggio/PSR_Project3/blob/main/LICENSE)
-## Group members - G3
+## Nome dos participantes do Projeto - G3
 
 |  Num Mec | Nome                | email                   |
 | ----: | ------------------- | ----------------------- |
@@ -10,8 +10,10 @@ Terceiro trabalho de PSR
 | 118200|   Miguel Simões     |  miguelbsimoes@ua.pt    |
 
 
-## Structure of navigation files:
-**partI** - where you have all the files <br>
+## Ordem de execução do Projeto:
+**Parte 1** - Lançar os ficheiros "launch". Quarto e robô terão sues "spawns". <br>
+**Parte 2** - Criar robô com respectios sensores e câmeras. <br>
+**Parte 3** - Mapear Casa <br>
 **images** - where the images are stored <br>
 **scripts** - where the scripts are saved and where you can create virtual environments (env) as well
 
@@ -42,7 +44,7 @@ roslaunch project_bringup bringup.launch
 rosrun project_navigation teleop
 ```
 
-## Bibliografia
+## Links de Apoio:
  - https://www.w3schools.com/git/default.asp
  - https://www.w3schools.com/xml/dom_nodes.asp
  - https://opencv.org/
