@@ -24,6 +24,23 @@ Terceiro trabalho de PSR
  cc
  ```
 
+## Instruções para executar o projeto:
+
+### Lançar o Gazebo:
+
+```
+roslaunch project_bringup gazebo.launch
+```
+
+### Lançar o Rviz:
+```
+roslaunch project_bringup bringup.launch    
+```
+
+### Para controlar o robo pelo teclado:
+```
+rosrun project_navigation teleop
+```
 
 ## Bibliografia
  - https://www.w3schools.com/git/default.asp
