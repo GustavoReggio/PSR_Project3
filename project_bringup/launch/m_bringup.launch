@@ -14,6 +14,7 @@
 
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model robutler -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
 
+    <!-- Alterar pacotes -->
     <group if="$(arg use_navigation)">
         <include file="$(find robutler_navigation_23-24)/launch/localization.launch">
         </include>

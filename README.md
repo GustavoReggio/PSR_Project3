@@ -17,6 +17,10 @@ Terceiro trabalho de PSR
 **images** - where the images are stored <br>
 **scripts** - where the scripts are saved and where you can create virtual environments (env) as well
 
+## Descrição dos Pacotes:
+**project_bringup** - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
+**project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.
+**project_navigation** - Contém o mapa salvo e as diversas formas de navegação.
 
 ## Instruções para aceder o repositório:
 ```
