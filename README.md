@@ -12,8 +12,8 @@ Terceiro trabalho de PSR
 ## Descrição dos Pacotes:
 **project_bringup**     - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
 **project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.<br>
-**project_navigation**  - Contém o mapa salvo e as diversas formas de navegação.
-**imagens**             - Pasta que contém as imagens. <br>
+**project_navigation**  - Contém o mapa salvo e as diversas formas de navegação.<br>
+**imagens**             - Pasta que contém as imagens. 
 
 ## Ordem de execução do Projeto:
 **Parte 1** - Lançar os ficheiros "launch". Quarto e robô terão sues "spawns". <br>
@@ -28,7 +28,7 @@ Terceiro trabalho de PSR
 - Verificar se a mesa da sala está levantada (livre de objetos);
 - Fotografar a divisão X;
 - Verificar se alguém está em casa;
-- Contar o número de cubos azuis existentes em casa.<br>
+- Contar o número de cubos azuis existentes em casa.
 **Parte 6** - Missões Ativas (Avançadas).<br>
 - Tocar no objeto X;
 - Deitar o objeto X abaixo da mesa na divisão Y;
