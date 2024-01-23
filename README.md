@@ -74,11 +74,11 @@ cd ~/catkin_ws/src
 git clone https://github.com/naoki-mizuno/ds4_driver.git
 ```
 Compilar por:
-````
+```
 roslaunch ds4_driver ds4_driver.launch
 ou
 rosrun ds4_driver ds4_driver_node.py
-``
+```
 
 Lançar:
 ```
