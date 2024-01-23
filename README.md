@@ -9,18 +9,17 @@ Terceiro trabalho de PSR
 | 105037|   Gonçalo Ornelas   |  goncalo.ornelas0@ua.pt |
 | 118200|   Miguel Simões     |  miguelbsimoes@ua.pt    |
 
+## Descrição dos Pacotes:
+**project_bringup** - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
+**project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.<br>
+**project_navigation** - Contém o mapa salvo e as diversas formas de navegação.
+**imagens** - Pasta que contém as imagens. <br>
 
 ## Ordem de execução do Projeto:
 **Parte 1** - Lançar os ficheiros "launch". Quarto e robô terão sues "spawns". <br>
 **Parte 2** - Criar robô com respectios sensores e câmeras. <br>
 **Parte 3** - Mapear Casa <br>
-**images** - where the images are stored <br>
 **scripts** - where the scripts are saved and where you can create virtual environments (env) as well
-
-## Descrição dos Pacotes:
-**project_bringup** - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
-**project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.
-**project_navigation** - Contém o mapa salvo e as diversas formas de navegação.
 
 ## Instruções para aceder o repositório:
 ```
