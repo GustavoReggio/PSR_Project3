@@ -56,12 +56,38 @@ roslaunch project_bringup gazebo.launch
 roslaunch project_bringup bringup.launch    
 ```
 
-### Para controlar o robo pelo teclado:
+### Para controlar o robô:
+#### Por teclado:
 ```
 rosrun project_navigation teleop
+```
+#### Por PS4 control:
+Instalar:
+```
+git clone https://github.com/naoki-mizuno/ds4drv --branch devel
+cd ds4drv
+python2 setup.py install --prefix ~/.local
+sudo cp udev/50-ds4drv.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+cd ~/catkin_ws/src
+git clone https://github.com/naoki-mizuno/ds4_driver.git
+```
+Compilar por:
+````
+roslaunch ds4_driver ds4_driver.launch
+ou
+rosrun ds4_driver ds4_driver_node.py
+``
+
+Lançar:
+```
+roslaunch ds4_driver demo.launch
 ```
 
 ## Links de Apoio:
  - https://www.w3schools.com/git/default.asp
  - https://www.w3schools.com/xml/dom_nodes.asp
  - https://opencv.org/
+ - https://classic.gazebosim.org/tutorials?tut=ros_roslaunch
+ - https://wiki.ros.org/ds4_driver#:~:text=Pair%20and%20connect%20to%20your,to%20connect%20to%20the%20device.
