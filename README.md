@@ -91,3 +91,4 @@ roslaunch ds4_driver demo.launch
  - https://opencv.org/
  - https://classic.gazebosim.org/tutorials?tut=ros_roslaunch
  - https://wiki.ros.org/ds4_driver#:~:text=Pair%20and%20connect%20to%20your,to%20connect%20to%20the%20device.
+ - https://github.com/engcang/PS4_Joystick_teleop_Mobile_Robots_ROS_Python
