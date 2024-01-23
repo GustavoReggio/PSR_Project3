@@ -307,7 +307,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://turtlebot3_description/meshes/new/Pirate_Flag.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="package://project_description/meshes/new/Pirate_Flag.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="red"/>
     </visual>
@@ -340,7 +340,7 @@
     <visual>
       <origin xyz="0 0 0.0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://turtlebot3_description/meshes/new/flag_cap.stl" scale="0.002 0.002 0.002"/>
+        <mesh filename="package://project_description/meshes/new/flag_cap.stl" scale="0.002 0.002 0.002"/>
       </geometry>
       <material name="red"/>
     </visual>
