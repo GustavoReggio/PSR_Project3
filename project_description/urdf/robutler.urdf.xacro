@@ -246,6 +246,37 @@
   </joint>
   <link name="camera_rgb_optical_back"/>
 
+  <!-- Câmera Alta -->
+
+  <joint name="camera_joint_alta" type="fixed">
+    <origin xyz="0.073 -0.011 0.084" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link_alta"/>
+  </joint>
+
+  <link name="camera_link_alta">
+    <collision>
+      <origin xyz="0.005 0.011 0.013" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.030 0.027"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="camera_rgb_joint_alta" type="fixed">
+    <origin xyz="0.003 0.011 2.009" rpy="0 0.35 0"/>
+    <parent link="camera_link_alta"/>
+    <child link="camera_rgb_frame_alta"/>
+  </joint>
+  <link name="camera_rgb_frame_alta"/>
+
+  <joint name="camera_rgb_optical_joint_alta" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="camera_rgb_frame_alta"/>
+    <child link="camera_rgb_optical_frame_alta"/>
+  </joint>
+  <link name="camera_rgb_optical_frame_alta"/>
+
 
   <!-- Estético adicional -->
 
