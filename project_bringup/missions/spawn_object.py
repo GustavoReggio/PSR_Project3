@@ -20,7 +20,10 @@ def main():
     parser.add_argument('-l', '--location', type=str, help='', required=False,
                         default='on_bed')
     parser.add_argument('-o', '--object', type=str, help='', required=False,
-                        default='person_standing')
+                        default='cube_b')
+    
+    parser.add_argument('-m', '--menu', type=str, nargs='?', help='Mostar o Menu de objetos e Locais disponíveis', required=False,
+                        const=True)
 
     args = vars(parser.parse_args())  # creates a dictionary
     print(args)
@@ -30,7 +33,8 @@ def main():
 
 
 
-            ####Posições####
+            ####________Posições______####
+    
     poses = {}
 
     # on bed pose
@@ -43,53 +47,77 @@ def main():
     # on bed-side-table pose
     p = Pose()
     p.position = Point(x=-4.489786, y=2.867268, z=0.679033)
-    q = quaternion_from_euler(0, 0, 0)  # From euler angles (rpy) to quaternion
+    q = quaternion_from_euler(0, 0, 0)  
+    # From euler angles (rpy) to quaternion
     p.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
     poses['on_bed_side_table'] = {'pose': p}
 
-            ### define objects ###
+          
+            ###______define objects______###
+    
     objects = {}
 
-    # add object sphere_v
+     # add object sphere_r
     f = open(package_path + 'sphere_v/model.sdf', 'r')
     objects['sphere_v'] = {'name': 'sphere_v', 'sdf': f.read()}
+
+    # add object sphere_r
+    f = open(package_path + 'sphere_r/model.sdf', 'r')
+    objects['sphere_r'] = {'name': 'sphere_r', 'sdf': f.read()}
 
     # add object person_standing
     f = open(package_path + 'person_standing/model.sdf', 'r')
     objects['person_standing'] = {'name': 'person_standing', 'sdf': f.read()}
 
+    # add object cube_blue
+    f = open(package_path + 'cube_b/model.sdf', 'r')
+    objects['cube_b'] = {'name': 'cube_b', 'sdf': f.read()}
+
+    # add object cube_blue
+    f = open(package_path + 'laptop/model.sdf', 'r')
+    objects['laptop'] = {'name': 'laptop', 'sdf': f.read()}
+
     # Check if given object and location are valid
 
+    control = 0
     if not args['location'] in poses.keys():
         print('Location ' + args['location'] +
               ' is unknown. Available locations are ' + str(list(poses.keys())))
+        control =1
 
     if not args['object'] in objects.keys():
         print('Object ' + args['object'] +
               ' is unknown. Available objects are ' + str(list(objects.keys())))
+        control =1
 
+    if args['menu']:
+        print('Objects :' + str(objects.keys()) +'\n' + 'Locations :' + str(poses.keys()) + '\n')
+        control =1
     # -------------------------------
     # ROS
     # -------------------------------
 
     rospy.init_node('insert_object', log_level=rospy.INFO)
 
-    service_name = 'gazebo/spawn_sdf_model'
-    print('waiting for service ' + service_name + ' ... ', end='')
-    rospy.wait_for_service(service_name)
-    print('Found')
+    if control == 0:
 
-    service_client = rospy.ServiceProxy(service_name, SpawnModel)
+        service_name = 'gazebo/spawn_sdf_model'
+        print('waiting for service ' + service_name + ' ... ', end='')
+        rospy.wait_for_service(service_name)
+        print('Found')
 
-    print('Spawning an object ...')
-    uuid_str = str(uuid.uuid4())
-    service_client(objects['person_standing']['name'] + '_' + uuid_str,
-                   objects['person_standing']['sdf'],
-                   objects['person_standing']['name'] + '_' + uuid_str,
-                   poses['on_bed']['pose'],
-                   'world')
+        service_client = rospy.ServiceProxy(service_name, SpawnModel)
 
-    print('Done')
+        print('Spawning an object ...')
+        uuid_str = str(uuid.uuid4())
+        service_client(objects['cube_b']['name'] + '_' + uuid_str,
+                       #objects['person_standing']['sdf'],
+                       poses['on_bed_side_table']['pose'],
+                       objects['cube_b']['name'] + '_' + uuid_str,
+                       poses['on_bed']['pose'],
+                       'world')
+
+        print('Done')
 
 
 if __name__ == '__main__':

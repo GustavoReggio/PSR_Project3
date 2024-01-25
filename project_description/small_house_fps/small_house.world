@@ -82,7 +82,7 @@
         </include>
         <pose frame=''>-6.165067 2.030560 -0.000010 0 -0 0</pose>
 	</model>
-	<!-- <model name='NightStand_01_001'>
+	<model name='NightStand_01_001'>
         <static>true</static>    
         <include>
             <uri>model://aws_robomaker_residential_NightStand_01</uri>
@@ -95,7 +95,7 @@
             <uri>model://aws_robomaker_residential_NightStand_01</uri>
         </include>
         <pose frame=''>-4.407341 2.860420 0.005256 0 0.000002 0</pose>
-	</model> -->
+	</model>
 	<model name='Board_01_001'>
         <static>true</static>    
         <include>

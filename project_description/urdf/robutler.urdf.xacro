@@ -264,7 +264,7 @@
   </link>
 
   <joint name="camera_rgb_joint_alta" type="fixed">
-    <origin xyz="0.003 0.011 2.009" rpy="0 0.35 0"/>
+    <origin xyz="0.003 0.011 1.009" rpy="0 0.35 0"/>
     <parent link="camera_link_alta"/>
     <child link="camera_rgb_frame_alta"/>
   </joint>

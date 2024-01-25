@@ -11,9 +11,9 @@ Terceiro trabalho de PSR
 
 ## Descrição dos Pacotes:
 **project_bringup**     - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
-**project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.<br>
+**project_descriprion** - Contém os ficheiros que dão forma ao robô, criando os sensores e câmeras.<br>
 **project_navigation**  - Contém o mapa salvo e as diversas formas de navegação.<br>
-**small_house_fps**  - Contém uma versão autualizada do modelo small_house.<br>
+**project_yolo**        - Contém of ficheiros de detção de objetos e cores.<br>
 **imagens**             - Pasta que contém as imagens. 
 
 ## Ordem de execução do Projeto:
@@ -96,6 +96,10 @@ Lançar:
 ```
 roslaunch ds4_driver demo.launch
 ```
+### Spawn Objects:
+```
+rosrun project_bringup spawn_object.py -h 
+```
 
 ## Links de Apoio:
  - https://www.w3schools.com/git/default.asp
@@ -105,3 +109,5 @@ roslaunch ds4_driver demo.launch
  - https://wiki.ros.org/ds4_driver#:~:text=Pair%20and%20connect%20to%20your,to%20connect%20to%20the%20device.
  - https://github.com/engcang/PS4_Joystick_teleop_Mobile_Robots_ROS_Python
  - https://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
+ - https://wiki.ros.org/rviz/Tutorials/Interactive%20Markers%3A%20Getting%20Started#menu
+ - https://github.com/miguelriemoliveira/psr_22-23/blob/master/TrabalhoRobutler/psr_apartment_description/src/spawn_object.py
