@@ -20,6 +20,7 @@
       <kinematic>0</kinematic>
       <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+        <!-- Geometry -->
         <geometry>
           <sphere>
             <radius>0.1</radius>

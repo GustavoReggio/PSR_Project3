@@ -22,7 +22,9 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <!-- Geometry -->
         <geometry>
-          <<box size="0.1 0.1 0.1"/>>
+          <box>
+            <size>0.1 0.1 0.1</size> <!-- Tamanho da caixa (comprimento, largura, altura) -->
+          </box>
         </geometry>
         <material>
           <lighting>1</lighting>
@@ -47,7 +49,9 @@
         <max_contacts>10</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
-          <<box size="0.1 0.1 0.1"/>>
+          <box>
+            <size>0.1 0.01 0.1</size> <!-- Tamanho da caixa (comprimento, largura, altura) -->
+          </box>
         </geometry>
         <surface>
           <friction>
