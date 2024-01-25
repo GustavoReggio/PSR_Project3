@@ -215,4 +215,18 @@
     </sensor>
   </gazebo>
 
+  <!-- Matro -->
+  <gazebo reference="mastro_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <!-- Antena -->
+  <gazebo reference="antena_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+    <!-- Castelo -->
+  <gazebo reference="castle_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
 </robot>
