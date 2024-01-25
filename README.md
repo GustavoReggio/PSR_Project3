@@ -13,6 +13,7 @@ Terceiro trabalho de PSR
 **project_bringup**     - Contém os ficheiros .launch que arrancam o gasebo e o reviz para ter spawn do robô. <br>
 **project_descriprion** - Contém os ficheiros que dão forma ao robô e c ria os sensores e câmeras.<br>
 **project_navigation**  - Contém o mapa salvo e as diversas formas de navegação.<br>
+**small_house_fps**  - Contém uma versão autualizada do modelo small_house.<br>
 **imagens**             - Pasta que contém as imagens. 
 
 ## Ordem de execução do Projeto:

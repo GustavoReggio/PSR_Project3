@@ -20,10 +20,9 @@
       <kinematic>0</kinematic>
       <visual name='visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
+        <!-- Geometry -->
         <geometry>
-          <sphere>
-            <radius>0.1</radius>
-          </sphere>
+          <<box size="0.1 0.1 0.1"/>>
         </geometry>
         <material>
           <lighting>1</lighting>
@@ -48,10 +47,7 @@
         <max_contacts>10</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
-          <sphere>
-          <!-- Raio -->
-            <radius>0.1</radius>
-          </sphere>
+          <<box size="0.1 0.1 0.1"/>>
         </geometry>
         <surface>
           <friction>
