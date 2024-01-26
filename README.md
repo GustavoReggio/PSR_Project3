@@ -48,11 +48,6 @@ Terceiro trabalho de PSR
 Para importar e spawn de objetos
 ```
 export GAZEBO_MODEL_PATH=`rospack find project_description`/models/:${GAZEBO_MODEL_PATH}
-export GAZEBO_MODEL_PATH=`rospack find robutler_description_23-24`/models/:${GAZEBO_MODEL_PATH}
-```
-Em outro terminal Compilar ao final da adição dos exports:
-```
-cc
 ```
 
 ## Instruções para executar o projeto:
@@ -74,26 +69,6 @@ roslaunch project_bringup bringup.launch
 rosrun project_navigation teleop
 ```
 #### Por PS4 control:
-Instalar:
-```
-git clone https://github.com/naoki-mizuno/ds4drv --branch devel
-cd ds4drv
-python2 setup.py install --prefix ~/.local
-sudo cp udev/50-ds4drv.rules /etc/udev/rules.d/
-sudo udevadm control --reload-rules
-sudo udevadm trigger
-cd ~/catkin_ws/src
-git clone https://github.com/naoki-mizuno/ds4_driver.git
-```
-Compilar por:
-```
-roslaunch ds4_driver ds4_driver.launch
-ou
-rosrun ds4_driver ds4_driver_node.py
-```
-
-Lançar:
-
 ```
 rosrun joy joy_node
 ```
@@ -101,9 +76,6 @@ rosrun joy joy_node
 rosrun teleop_twist_joy teleop_node
 ```
 
-```
-roslaunch ds4_driver demo.launch
-```
 ### Spawn Objects:
 ```
 rosrun project_bringup spawn_object.py -h 
