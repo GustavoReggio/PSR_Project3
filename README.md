@@ -93,6 +93,13 @@ rosrun ds4_driver ds4_driver_node.py
 ```
 
 Lançar:
+
+```
+rosrun joy joy_node
+```
+```
+rosrun teleop_twist_joy teleop_node
+```
 ```
 roslaunch ds4_driver demo.launch
 ```
