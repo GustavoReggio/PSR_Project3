@@ -15,19 +15,15 @@ def detectObject(msg):
 
     cv_image = bridge.imgmsg_to_cv2(msg, "bgr8")
 
-    file_pattern = os.path.join("/home/kurostrife/catkin_ws/src/PSR_Project3/project_yolo/Images", '*.png')
+    file_pattern = os.path.join("/home/miguel/catkin_ws/src/git_grupo/PSR_Project3/project_yolo/Images/front_camera", '*.png')
 
     png_files = glob.glob(file_pattern)
-
-    print(png_files)
 
     for image in png_files:
         template = cv2.imread(image)
         h, w, _ = template.shape
-        print("cenas1")
 
         if image is not None:
-            print("cenas2")
             
             result = cv2.matchTemplate(cv_image, template, cv2.TM_SQDIFF)
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
