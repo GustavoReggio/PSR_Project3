@@ -80,6 +80,10 @@ rosrun teleop_twist_joy teleop_node
 ```
 rosrun project_bringup spawn_object.py -h 
 ```
+### Missions:
+```
+rosrun project_bringup mission_manager.py
+```
 
 ## Links de Apoio:
  - https://www.w3schools.com/git/default.asp
