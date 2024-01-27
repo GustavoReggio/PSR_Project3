@@ -19,8 +19,8 @@
     <group if="$(arg use_navigation)">
         <include file="$(find project_navigation)/launch/localization.launch">
         </include>
-        <!--<include file="$(find project_navigation)/launch/navigation.launch">
-        </include>-->
+        <include file="$(find project_navigation)/launch/navigation.launch">
+        </include>
         <include file="$(find project_bringup)/launch/gazebo.launch">
         </include>
     </group>

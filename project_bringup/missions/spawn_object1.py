@@ -10,6 +10,88 @@ from tf.transformations import quaternion_from_euler
 import uuid
 import argparse
 
+def spawn_menu(objects,poses):
+    # -------------------------------
+    # ROS
+    # -------------------------------
+
+    poses = {}
+    q = quaternion_from_euler(0, 0, 0) 
+
+    # on bed pose
+    p1 = Pose()
+    p1.position = Point(x=-6.033466, y=1.971232, z=0.644345)
+    # From euler angles (rpy) to quaternion
+    p1.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    poses['on_bed'] = {'pose': p1}
+
+    rospy.init_node('insert_object', log_level=rospy.INFO)
+
+    print('looking for confirmation...')
+    service_name = 'gazebo/spawn_sdf_model'
+    print('waiting for service ' + service_name + ' ... ', end='')
+    rospy.wait_for_service(service_name)
+    print('Found')
+
+    service_client = rospy.ServiceProxy(service_name, SpawnModel)
+
+    print('Spawning an object ...')
+    uuid_str = str(uuid.uuid4())
+    service_client('cube_b_' + uuid_str,
+                   objects['cube_b']['sdf'],
+                   'cube_b_' + uuid_str,
+                   poses['on_bed']['pose'],
+                   'world')
+
+    print('Done')
+
+
+def spawn_menu1():
+    # Define bed pose
+    q = quaternion_from_euler(0, 0, 0)
+    bed_pose = Pose()
+    bed_pose.position = Point(x=-6.033466, y=1.971232, z=0.644345)
+    bed_pose.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+
+    # Create a cube object
+    cube_sdf = """
+    <?xml version="1.0" ?>
+    <sdf version="1.4">
+      <model name="cube_menu">
+        <static>true</static>
+        <link name="link">
+          <pose>0 0 0.5 0 0 0</pose>
+          <collision name="collision">
+            <geometry>
+              <box>
+                <size>0.2 0.2 0.2</size>
+              </box>
+            </geometry>
+          </collision>
+          <visual name="visual">
+            <geometry>
+              <box>
+                <size>0.2 0.2 0.2</size>
+              </box>
+            </geometry>
+          </visual>
+        </link>
+      </model>
+    </sdf>
+    """
+
+    # Spawn the cube at bed pose
+    rospy.wait_for_service('gazebo/spawn_sdf_model')
+    try:
+        spawn_sdf = rospy.ServiceProxy('gazebo/spawn_sdf_model', SpawnModel)
+        uuid_str = str(uuid.uuid4())
+        spawn_sdf('cube_menu_' + uuid_str, cube_sdf, 'cube_menu_' + uuid_str, bed_pose, 'world')
+        print('Spawned cube at bed pose.')
+    except rospy.ServiceException as e:
+        print('Service call failed:', e)    
+
+
+
 
 def main():
 
@@ -198,6 +280,9 @@ def main():
                        'world')
 
         print('Done')
+
+        spawn_menu()
+        spawn_menu1()
 
 
 if __name__ == '__main__':
