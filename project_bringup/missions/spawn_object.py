@@ -61,22 +61,16 @@ def main():
 
     # on bedroom-table pose
     p4 = Pose()
-    p4.position = Point(x=-9.018304, y=1.847949, z=0.771113) 
+    p4.position = Point(x=-8.920621, y=1.971230, z=0.759914) 
     # From euler angles (rpy) to quaternion
     p4.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
     poses['on_bedroom_table'] = {'pose': p4}
 
-    # on bedroom-table pose
-    p5 = Pose()
-    p4.position = Point(x=-9.018304, y=1.847949, z=0.771113) 
-    # From euler angles (rpy) to quaternion
-    p5.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
-    poses['on_bedroom_table'] = {'pose': p5}
 
     # On shelf
     p6 = Pose()
     p6.position = Point(x=4.321983, y=-5.099168, z=0.383039)
-    p6.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p6.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_shelf'] = {'pose': p6}
 
     # on bedroom floor pose
@@ -88,10 +82,10 @@ def main():
 
     # On sofa
     p8 = Pose()
-    p8.position = Point(x=-0.289190, y=-1.449864, z=0.478602)
+    p8.position = Point(x=-0.231274, y=-1.361250, z=0.500937)
     # From euler angles (rpy) to quaternion
     p8.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
-    poses['on_sofa'] = {'pose': p4}
+    poses['on_sofa'] = {'pose': p8}
 
     # On_top_kitchen_table
     p9 = Pose()
@@ -104,7 +98,7 @@ def main():
     p10 = Pose()
     p10.position = Point(x=-8.247623, y=-4.505759, z=0.360569)
     # From euler angles (rpy) to quaternion
-    p10.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p10.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_bedroom_chair'] = {'pose': p10}
 
     # On orange table
@@ -125,14 +119,15 @@ def main():
     p13 = Pose()
     p13.position = Point(x=0.885594, y=-5.203157, z=0.524760)
     # From euler angles (rpy) to quaternion
-    p13.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    q13 = quaternion_from_euler(0, 0, 3.14) 
+    p13.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_tv_table'] = {'pose': p13}
 
     # On sink
     p14 = Pose()
     p14.position = Point(x=7.078957, y=-5.157995, z=0.913168)
     # From euler angles (rpy) to quaternion
-    p14.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p14.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_sink'] = {'pose': p14}
 
 
@@ -182,9 +177,11 @@ def main():
     # -------------------------------
 
     rospy.init_node('insert_object', log_level=rospy.INFO)
+    
 
     if control == 0:
 
+        print('looking for confirmation...')
         service_name = 'gazebo/spawn_sdf_model'
         print('waiting for service ' + service_name + ' ... ', end='')
         rospy.wait_for_service(service_name)
@@ -192,14 +189,13 @@ def main():
 
         service_client = rospy.ServiceProxy(service_name, SpawnModel)
 
-        # print('Spawning an object ...')
-        # uuid_str = str(uuid.uuid4())
-        # service_client(objects['cube_b']['name'] + '_' + uuid_str,
-        #                #objects['person_standing']['sdf'],
-        #                poses['on_bed_side_table_left']['pose'],
-        #                objects['cube_b']['name'] + '_' + uuid_str,
-        #                poses['on_bed']['pose'],
-        #                'world')
+        print('Spawning an object ...')
+        uuid_str = str(uuid.uuid4())
+        service_client(objects[args['object']]['name'] + '_' + uuid_str,
+                       objects[args['object']]['sdf'],
+                       objects[args['object']]['name'] + '_' + uuid_str,
+                       poses[args['location']]['pose'],
+                       'world')
 
         print('Done')
 
