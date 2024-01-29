@@ -50,6 +50,12 @@ Para importar e spawn de objetos
 export GAZEBO_MODEL_PATH=`rospack find project_description`/models/:${GAZEBO_MODEL_PATH}
 ```
 
+## Instruções para instalação do YOLO - darknet (Opcional):
+
+```
+https://github.com/leggedrobotics/darknet_ros
+```
+
 ## Instruções para executar o projeto:
 
 ### Lançar o Gazebo:
@@ -60,7 +66,12 @@ roslaunch project_bringup gazebo.launch
 
 ### Lançar o Rviz:
 ```
-roslaunch project_bringup bringup.launch    
+roslaunch project_bringup bringup.launch
+```
+
+### Lançar o Gazebo e Rviz:
+```
+roslaunch project_bringup m_bringup.launch
 ```
 
 ### Para controlar o robô:
@@ -80,6 +91,26 @@ rosrun teleop_twist_joy teleop_node
 ```
 rosrun project_bringup spawn_object.py -h 
 ```
+
+### Objects Detection:
+Para a deteção de objetos desenvolveu-se dois métodos:
+ - OpenCv
+ - Yolo - Darknet
+
+Para OpenCV utiliza-se um dos dois primeiros comandos fornecidos
+```
+rosrun project_yolo open_match_Dynamic.py 
+```
+O primeiro comando utiliza um algoritmo com o propósito de ter o processo flexivel, porém ainda não se encontra completo, consecutivamente, demonstra problemas visuais.
+```
+rosrun project_yolo open_match_nonDynamic.py 
+```
+No segundo comando foi utiliza o código _hardcoded_ para a deteção, que possibilita não haver tantos problemas visuais, porém com o algoritmo mais extenso
+```
+roslaunch darknet_ros darknet_ros.launch 
+```
+Este método é implementado com auxilio do guia https://github.com/leggedrobotics/darknet_ros, pois a biblioteca utilizada, para utilização do _YOLO_, é fornecida pelo mesmo link. Esta contém melhor deteção, mas não haverá tanto controlo nos algoritmos 
+
 ### Missions:
 ```
 rosrun project_bringup mission_manager.py
@@ -95,3 +126,5 @@ rosrun project_bringup mission_manager.py
  - https://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
  - https://wiki.ros.org/rviz/Tutorials/Interactive%20Markers%3A%20Getting%20Started#menu
  - https://github.com/miguelriemoliveira/psr_22-23/blob/master/TrabalhoRobutler/psr_apartment_description/src/spawn_object.py
+ - https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html
+ - https://github.com/leggedrobotics/darknet_ros
