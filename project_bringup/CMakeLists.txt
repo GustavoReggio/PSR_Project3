@@ -10,6 +10,7 @@ project(project_bringup)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  cv_bridge
   std_msgs
 )
 

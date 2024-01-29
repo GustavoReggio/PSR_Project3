@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
 from functools import partial
+import numpy
 import rospy
+import cv2
+from std_msgs.msg import String
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
 from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from visualization_msgs.msg import *
@@ -19,6 +24,8 @@ menu_handler = MenuHandler()
 h_first_entry = 0
 h_mode_last = 0
 
+# counter to keep track of the number imaged saved from the moment of initialization of the node
+check_imaged_saved_count = 0
 
 def enableCb(feedback):
     handle = feedback.menu_entry_id
@@ -101,8 +108,9 @@ def makeMenuMarker(name):
 def deepCb(feedback):
     rospy.loginfo("The deep sub-menu has been found.")
 
-
 def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
+
+    result_msg = None
 
     print('Called moving to ' + location)
     p = Pose()
@@ -128,17 +136,69 @@ def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
 
     print('move base completed goal with result ' + str(result_msg))
 
+def moveToCapture(feedback, x, y, z, R, P, Y, location, goal_publisher):
+
+    bridge = CvBridge()
+
+    result_msg = None
+
+    print('Called moving to ' + location)
+    p = Pose()
+    p.position = Point(x=x, y=y, z=z)
+    q = quaternion_from_euler(R, P, Y)  # From euler angles (rpy) to quaternion
+    p.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+
+    ps = PoseStamped()
+    ps.pose = p
+    ps.header = Header(frame_id='map', stamp=rospy.Time.now())
+
+    print('Sending Goal move to ' + location)
+    goal_publisher.publish(ps)
+
+    try:
+        result_msg = rospy.wait_for_message('/move_base/result', MoveBaseActionResult, timeout=60)
+    except:
+        print('Timeout waiting for move_base result')
+        # TODO handle the timeout
+        return
+
+    print('move base completed goal with result ' + str(result_msg))
+
+    # Assuming you want to wait for images after the move_base result
+    try:
+
+        result_msg_front = rospy.wait_for_message('/camera/rgb/image_raw', Image, timeout=10) 
+        result_msg_back = rospy.wait_for_message('/camera/rgb/image_raw_back', Image, timeout=10) 
+        result_msg_top = rospy.wait_for_message('/camera/rgb/image_raw_up', Image, timeout=10)
+
+        cv_image_front = bridge.imgmsg_to_cv2(result_msg_front, "bgr8")
+        cv_image_back = bridge.imgmsg_to_cv2(result_msg_back, "bgr8")
+        cv_image_top = bridge.imgmsg_to_cv2(result_msg_top, "bgr8")
+
+        cv_image_front_copy = cv_image_front.copy()
+        cv_image_back_copy = cv_image_back.copy()
+        cv_image_top_copy = cv_image_top.copy()
+
+        cv2.imwrite("front_camera_" + location + ".png", cv_image_front_copy)
+        cv2.imwrite("back_camera_" + location + ".png", cv_image_back_copy)
+        cv2.imwrite("top_camera_" + location + ".png", cv_image_top_copy)
+
+    except rospy.exceptions.ROSException:
+        print('Timeout waiting for images')
+        # TODO handle the timeout for image capture
+        return
 
 def main():
 
     global server
 
-    # -------------------------------
-    # Initialization
-    # -------------------------------
+    # ---------------#
+    # Initialization #
+    # ---------------#
+
     rospy.init_node("mission_manager")
 
-    # Create move_base_simple/goal publisher
+    # create move_base_simple/goal publisher
     goal_publisher = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=1)
 
     server = InteractiveMarkerServer("mission")
@@ -181,6 +241,52 @@ def main():
                                                  R=-0.000007, P=0.003198, Y=1.980398,
                                                  location='BackRoom',
                                                  goal_publisher=goal_publisher))
+
+    h_first_entry_sec = menu_handler.insert("Capture")
+
+    entry = menu_handler.insert("kitchen", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=6.568593, y=-1.788789, z=0,
+                                                 R=0, P=0, Y=-1.504141,
+                                                 location='kitchen',
+                                                 goal_publisher=goal_publisher))
+
+    entry = menu_handler.insert("bedroom", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=-4.409525, y=-0.182006, z=0,
+                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                 location='bedroom',
+                                                 goal_publisher=goal_publisher))
+    
+    entry = menu_handler.insert("Gym", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=2.146100, y=2.415270, z=0,
+                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                 location='Gym',
+                                                 goal_publisher=goal_publisher))
+    
+    entry = menu_handler.insert("LivingRoom", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=1.255550, y=0.113362, z=0,
+                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                 location='LivingRoom',
+                                                 goal_publisher=goal_publisher))
+    
+    entry = menu_handler.insert("BackRoom", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=-5.260976, y=-3.623521, z=0,
+                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                 location='BackRoom',
+                                                 goal_publisher=goal_publisher))
+
+    h_first_entry_third = menu_handler.insert("See Table")
+
+    entry = menu_handler.insert("LivingRoom", parent=h_first_entry_sec,
+                            callback=partial(moveTo,
+                                                x=1.255550, y=0.113362, z=0,
+                                                R=-0.000007, P=0.003198, Y=1.980398,
+                                                location='LivingRoom',
+                                                goal_publisher=goal_publisher))
 
     # entry = menu_handler.insert("living room", parent=h_first_entry, callback=moveToLivingRoom)
 
