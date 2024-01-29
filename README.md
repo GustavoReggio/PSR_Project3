@@ -105,7 +105,7 @@ O primeiro comando utiliza um algoritmo com propósito de fácil adaptação, po
 ```
 rosrun project_yolo open_match_nonDynamic.py 
 ```
-No segundo comando foi implementado a deteção _hardcoded_, que possibilita não haver tantos problemas visuais, porºem com o algoritmo mais extenso
+No segundo comando foi utiliza o código _hardcoded_ para a deteção, que possibilita não haver tantos problemas visuais, porém com o algoritmo mais extenso
 ```
 roslaunch darknet_ros darknet_ros.launch 
 ```
