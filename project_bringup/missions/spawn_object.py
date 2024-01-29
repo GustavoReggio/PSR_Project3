@@ -35,7 +35,6 @@ def main():
     #-----------#
     # Positions #
     #-----------#
-    
 
     poses = {}
     q = quaternion_from_euler(0, 0, 0) 
