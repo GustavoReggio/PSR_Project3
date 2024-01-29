@@ -21,7 +21,7 @@ def main():
                         default='on_bed')
     parser.add_argument('-o', '--object', type=str, help='', required=False,
                         default='cube_b')
-    
+
     parser.add_argument('-m', '--menu', type=str, nargs='?', help='Mostar o Menu de objetos e Locais disponíveis', required=False,
                         const=True)
 
@@ -32,12 +32,14 @@ def main():
     package_path = rospack.get_path('project_description') + '/models/'
 
 
+    #-----------#
+    # Positions #
+    #-----------#
 
-            ####________Posições______####
-    
     poses = {}
     q = quaternion_from_euler(0, 0, 0) 
     q13 = quaternion_from_euler(0, 0, 3.14) 
+
     # on bed pose
     p1 = Pose()
     p1.position = Point(x=-6.033466, y=1.971232, z=0.644345)
@@ -66,11 +68,10 @@ def main():
     p4.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
     poses['on_bedroom_table'] = {'pose': p4}
 
-
     # On shelf
     p6 = Pose()
     p6.position = Point(x=4.321983, y=-5.099168, z=0.383039)
-    p6.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p6.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_shelf'] = {'pose': p6}
 
     # on bedroom floor pose
@@ -98,7 +99,7 @@ def main():
     p10 = Pose()
     p10.position = Point(x=-8.247623, y=-4.505759, z=0.360569)
     # From euler angles (rpy) to quaternion
-    p10.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p10.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_bedroom_chair'] = {'pose': p10}
 
     # On orange table
@@ -118,8 +119,7 @@ def main():
     # On tv tabel
     p13 = Pose()
     p13.position = Point(x=0.885594, y=-5.203157, z=0.524760)
-    # From euler angles (rpy) to quaternion
-    q13 = quaternion_from_euler(0, 0, 3.14) 
+    # From euler angles (rpy) to quaternion 
     p13.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_tv_table'] = {'pose': p13}
 
