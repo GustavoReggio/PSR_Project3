@@ -311,28 +311,6 @@ def main():
                                                 location='LivingRoom',
                                                 goal_publisher=goal_publisher))
 
-    h_second_entry = menu_handler.insert("Search on")
-
-    entry = menu_handler.insert("Bed", parent=h_second_entry,
-                                callback=partial(moveTo,
-                                                 x=-6.152070, y=0.317355, z=-0.001008,
-                                                 R=-0.000003, P=0.003185, Y=1.561549,
-                                                 location='Bed',
-                                                 goal_publisher=goal_publisher))
-    
-    entry = menu_handler.insert("Dinner Table", parent=h_second_entry,
-                                callback=partial(moveTo,
-                                                 x=5.208464, y=0.918777, z=-0.001008,
-                                                 R=-0.000002, P=0.003184, Y=0.030115,
-                                                 location='Dinner Table',
-                                                 goal_publisher=goal_publisher))
-
-    entry = menu_handler.insert("Sofa", parent=h_second_entry,
-                                callback=partial(moveTo,
-                                                 x=1.063805, y=-1.081727, z=-0.001008,
-                                                 R=-0.000002, P=-0.003185, Y=-3.105043,
-                                                 location='sofa',
-                                                 goal_publisher=goal_publisher))
     makeMenuMarker("marker1")
 
     menu_handler.apply(server, "marker1")
