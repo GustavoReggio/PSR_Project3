@@ -24,7 +24,7 @@ def detectEmptyTable(msg):
     cv_image = bridge.imgmsg_to_cv2(msg, "bgr8")
     
     # search images
-    file_pattern = os.path.join("../Images/top_camera", '*.png')
+    file_pattern = os.path.join("../Images/top_camera_mesa", '*.png')
 
     png_files = glob.glob(file_pattern)
 
