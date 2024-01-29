@@ -101,7 +101,7 @@ Para OpenCV utiliza-se um dos dois primeiros comandos fornecidos
 ```
 rosrun project_yolo open_match_Dynamic.py 
 ```
-O primeiro comando utiliza um algoritmo com propósito de fácil adaptação, porém ainda não se encontrar completo, consecutivamente, demonstra problemas gráficos.
+O primeiro comando utiliza um algoritmo com o propósito de fácil adaptação, porém ainda não se encontrar completo, consecutivamente, demonstra problemas gráficos.
 ```
 rosrun project_yolo open_match_nonDynamic.py 
 ```
