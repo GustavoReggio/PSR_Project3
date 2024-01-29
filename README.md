@@ -69,7 +69,7 @@ roslaunch project_bringup gazebo.launch
 roslaunch project_bringup bringup.launch
 ```
 
-### Lançar o Gazebo e Rviz:
+### Lançar o Gazebo, Rviz, Navigation e Localization:
 ```
 roslaunch project_bringup m_bringup.launch
 ```
@@ -95,12 +95,22 @@ rosrun project_bringup spawn_object.py -h
 ```
 rosrun project_bringup mission_manager.py
 ```
+### Deteção de objetos nos locais:
+```
+roscd project_yolo/script 
+./open_match_Dynamic_top.py 
+```
+### Deteção de mesa vazia:
+```
+roscd project_yolo/script 
+./open_match_Dynamic_top_table.py 
+```
 ### Objects Detection:
 Para a deteção de objetos desenvolveu-se dois métodos:
  - OpenCv
  - Yolo - Darknet
 
-Para OpenCV utiliza-se um dos dois primeiros comandos fornecidos
+Para OpenCV utiliza-se um dos dois primeiros comandos fornecidos.
 ```
 roscd project_yolo/script 
 ./open_match_Dynamic.py 
@@ -110,11 +120,12 @@ O primeiro comando utiliza um algoritmo com o propósito de ter o processo flexi
 roscd project_yolo/script
 ./open_match_nonDynamic.py 
 ```
-No segundo comando foi utiliza o código _hardcoded_ para a deteção, que possibilita não haver tantos problemas visuais, porém com o algoritmo mais extenso
+No segundo comando foi utiliza o código _hardcoded_ para a deteção, que possibilita não haver tantos problemas visuais, porém com o algoritmo mais extenso.
 ```
 roslaunch darknet_ros darknet_ros.launch 
 ```
-Este método é implementado com auxilio do guia https://github.com/leggedrobotics/darknet_ros, pois a biblioteca utilizada, para utilização do _YOLO_, é fornecida pelo mesmo link. Esta contém melhor deteção, mas não haverá tanto controlo nos algoritmos 
+Este método é implementado com auxilio do guia https://github.com/leggedrobotics/darknet_ros, pois a biblioteca utilizada, para utilização do _YOLO_, é fornecida pelo mesmo link. Esta contém melhor deteção, mas não haverá tanto controlo nos algoritmos.
+
 
 
 ## Links de Apoio:
