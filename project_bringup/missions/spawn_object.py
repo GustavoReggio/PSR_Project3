@@ -38,7 +38,7 @@ def main():
 
     poses = {}
     q = quaternion_from_euler(0, 0, 0) 
-    q13 = quaternion_from_euler(0, 0, 3.14)
+    q13 = quaternion_from_euler(0, 0, 3.14) 
 
     # on bed pose
     p1 = Pose()
@@ -78,7 +78,7 @@ def main():
     p7 = Pose()
     p7.position = Point(x=-4.153343, y=-4.627160, z=0.318684) 
     # From euler angles (rpy) to quaternion
-    p7.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+    p7.orientation = Quaternion(x=q13[0], y=q13[1], z=q13[2], w=q13[3])
     poses['on_bedroom_flor'] = {'pose': p7}
 
     # On sofa
