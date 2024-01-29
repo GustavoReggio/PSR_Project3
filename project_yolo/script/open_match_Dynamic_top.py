@@ -60,25 +60,25 @@ def detectEmptyTable(msg):
             #    print("cama = " + str(min_val))
             #if image == "../Images/top_camera/bola_vermelha_cozinha.png":
             #    print("mesa = " + str(min_val))
-            if image == "../Images/top_camera/bola_vermelha_sofa.png":
-                print("sofa = " + str(min_val))
+            #if image == "../Images/top_camera/bola_vermelha_sofa.png":
+            #    print("sofa = " + str(min_val))
 
             #----------------------#
             #   Detection filter   #
             #----------------------#
 
             # detect red ball bed
-            if (image == "../Images/top_camera/bola_vermelha.png" and min_val >= 50000000.0 and min_val <= 250000000.0):
-                cv2.putText(cv_image_copy, 'BOLA VERMELHA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,255,0), 2, cv2.LINE_AA) 
+            if (image == "../Images/top_camera/bola_vermelha.png" and min_val >= 100000000.0 and min_val <= 600000000.0):
+                cv2.putText(cv_image_copy, 'BOLA VERMELHA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
                 cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
 
             # detect red ball kitchen
-            if (image == "../Images/top_camera/bola_vermelha_cozinha.png" and min_val > 2000000.0 and min_val <= 6000000.0):
+            if (image == "../Images/top_camera/bola_vermelha_cozinha.png" and min_val > 10000000.0 and min_val <= 60000000.0):
                 cv2.putText(cv_image_copy, 'BOLA VERMELHA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
                 cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
 
             # detect red ball sofa
-            if (image == "../Images/top_camera/bola_vermelha_sofa.png" and min_val > 4000000.0 and min_val <= 8000000.0):
+            if (image == "../Images/top_camera/bola_vermelha_sofa.png" and min_val > 10000000.0 and min_val <= 80000000.0):
                 cv2.putText(cv_image_copy, 'BOLA VERMELHA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
                 cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
 

@@ -78,7 +78,7 @@ def detectEmptyTable(msg):
                 cv2.putText(cv_image_copy, 'MESA LIVRE', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,255,0), 2, cv2.LINE_AA) 
                 cv2.rectangle(cv_image_copy, location, bottom_right, (0,255,0), 5)
             # detect table ocupy
-            elif ((image == "../Images/top_camera_mesa/mesa_livre_cozinha.png" and min_val > 150000000.0 and min_val < 400000000.0)
+            elif ((image == "../Images/top_camera_mesa/mesa_livre_cozinha.png" and min_val > 50000000.0 and min_val < 400000000.0)
                   or (image == "../Images/top_camera/mesa_livre_cozinha.png" and min_val > 500000000.0 and min_val < 700000000.0)):
                 cv2.putText(cv_image_copy, 'MESA OCUPADA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
                 cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
