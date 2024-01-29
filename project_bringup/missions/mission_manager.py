@@ -24,8 +24,6 @@ menu_handler = MenuHandler()
 h_first_entry = 0
 h_mode_last = 0
 
-goal = None
-
 # counter to keep track of the number imaged saved from the moment of initialization of the node
 check_imaged_saved_count = 0
 
@@ -111,9 +109,7 @@ def deepCb(feedback):
     rospy.loginfo("The deep sub-menu has been found.")
 
 def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
-
-    global goal
-
+    
     result_msg = None
 
     print('Called moving to ' + location)
@@ -140,8 +136,6 @@ def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
         print('Timeout waiting for moveto')
         # TODO
         return
-
-    print('move base completed goal with result ' + str(result_msg))
 
 def moveToCapture(feedback, x, y, z, R, P, Y, location, goal_publisher):
 
@@ -173,7 +167,6 @@ def moveToCapture(feedback, x, y, z, R, P, Y, location, goal_publisher):
 
     print('move base completed goal with result ' + str(result_msg))
 
-    # Assuming you want to wait for images after the move_base result
     try:
 
         result_msg_front = rospy.wait_for_message('/camera/rgb/image_raw', Image, timeout=10) 
