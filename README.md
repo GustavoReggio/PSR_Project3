@@ -51,7 +51,9 @@ export GAZEBO_MODEL_PATH=`rospack find project_description`/models/:${GAZEBO_MOD
 ```
 
 ## Instruções para instalação do YOLO - darknet (Opcional):
+```
 https://github.com/leggedrobotics/darknet_ros
+```
 
 ## Instruções para executar o projeto:
 
