@@ -24,6 +24,8 @@ menu_handler = MenuHandler()
 h_first_entry = 0
 h_mode_last = 0
 
+goal = None
+
 # counter to keep track of the number imaged saved from the moment of initialization of the node
 check_imaged_saved_count = 0
 
@@ -110,6 +112,8 @@ def deepCb(feedback):
 
 def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
 
+    global goal
+
     result_msg = None
 
     print('Called moving to ' + location)
@@ -122,7 +126,10 @@ def moveTo(feedback, x, y, z, R, P, Y, location, goal_publisher):
     ps.pose = p
     ps.header = Header(frame_id='map', stamp=rospy.Time.now())
 
-    print('Sending Goal move to ' + location)
+    goal = 'Sending Goal move to ' + location
+
+    print(goal)
+
     goal_publisher.publish(ps)
 
     # TODO know when move is finished
@@ -152,7 +159,9 @@ def moveToCapture(feedback, x, y, z, R, P, Y, location, goal_publisher):
     ps.pose = p
     ps.header = Header(frame_id='map', stamp=rospy.Time.now())
 
-    print('Sending Goal move to ' + location)
+    goal = 'Sending Goal move to ' + location
+
+    print(goal)
     goal_publisher.publish(ps)
 
     try:
@@ -207,18 +216,25 @@ def main():
     global h_first_entry, h_mode_last
     h_first_entry = menu_handler.insert("Move to")
 
-    entry = menu_handler.insert("kitchen", parent=h_first_entry,
+    entry = menu_handler.insert("Kitchen", parent=h_first_entry,
                                 callback=partial(moveTo,
                                                  x=6.568593, y=-1.788789, z=0,
                                                  R=0, P=0, Y=-1.504141,
-                                                 location='kitchen',
+                                                 location='Kitchen',
+                                                 goal_publisher=goal_publisher))
+    
+    entry = menu_handler.insert("Dinner Table", parent=h_first_entry,
+                                callback=partial(moveTo,
+                                                 x=4.826607, y=0.897721, z=-0.001008,
+                                                 R=-0.000003, P=0.003184, Y=0.023003,
+                                                 location='Dinner Table',
                                                  goal_publisher=goal_publisher))
 
-    entry = menu_handler.insert("bedroom", parent=h_first_entry,
+    entry = menu_handler.insert("Bedroom", parent=h_first_entry,
                                 callback=partial(moveTo,
                                                  x=-4.409525, y=-0.182006, z=0,
                                                  R=-0.000007, P=0.003198, Y=1.980398,
-                                                 location='bedroom',
+                                                 location='Bedroom',
                                                  goal_publisher=goal_publisher))
     
     entry = menu_handler.insert("Gym", parent=h_first_entry,
@@ -230,8 +246,8 @@ def main():
     
     entry = menu_handler.insert("LivingRoom", parent=h_first_entry,
                                 callback=partial(moveTo,
-                                                 x=1.255550, y=0.113362, z=0,
-                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                x=1.407235, y=-0.186747, z=-0.001010,
+                                                R=-0.000008, P=0.003199, Y=-1.559985,
                                                  location='LivingRoom',
                                                  goal_publisher=goal_publisher))
     
@@ -244,18 +260,25 @@ def main():
 
     h_first_entry_sec = menu_handler.insert("Capture")
 
-    entry = menu_handler.insert("kitchen", parent=h_first_entry_sec,
+    entry = menu_handler.insert("Kitchen", parent=h_first_entry_sec,
                                 callback=partial(moveToCapture,
                                                  x=6.568593, y=-1.788789, z=0,
                                                  R=0, P=0, Y=-1.504141,
-                                                 location='kitchen',
+                                                 location='Kitchen',
+                                                 goal_publisher=goal_publisher))
+    
+    entry = menu_handler.insert("Dinner Table", parent=h_first_entry_sec,
+                                callback=partial(moveToCapture,
+                                                 x=4.826607, y=0.897721, z=-0.001008,
+                                                 R=-0.000003, P=0.003184, Y=0.023003,
+                                                 location='Dinner Table',
                                                  goal_publisher=goal_publisher))
 
-    entry = menu_handler.insert("bedroom", parent=h_first_entry_sec,
+    entry = menu_handler.insert("Bedroom", parent=h_first_entry_sec,
                                 callback=partial(moveToCapture,
                                                  x=-4.409525, y=-0.182006, z=0,
                                                  R=-0.000007, P=0.003198, Y=1.980398,
-                                                 location='bedroom',
+                                                 location='Bedroom',
                                                  goal_publisher=goal_publisher))
     
     entry = menu_handler.insert("Gym", parent=h_first_entry_sec,
@@ -267,8 +290,8 @@ def main():
     
     entry = menu_handler.insert("LivingRoom", parent=h_first_entry_sec,
                                 callback=partial(moveToCapture,
-                                                 x=1.255550, y=0.113362, z=0,
-                                                 R=-0.000007, P=0.003198, Y=1.980398,
+                                                x=1.407235, y=-0.186747, z=-0.001010,
+                                                R=-0.000008, P=0.003199, Y=-1.559985,
                                                  location='LivingRoom',
                                                  goal_publisher=goal_publisher))
     
@@ -280,15 +303,20 @@ def main():
                                                  goal_publisher=goal_publisher))
 
     h_first_entry_third = menu_handler.insert("See Table")
+    
+    entry = menu_handler.insert("Dinner Table", parent=h_first_entry_third,
+                                callback=partial(moveTo,
+                                                 x=4.826607, y=0.897721, z=-0.001008,
+                                                 R=-0.000003, P=0.003184, Y=0.023003,
+                                                 location='Dinner Table',
+                                                 goal_publisher=goal_publisher))
 
-    entry = menu_handler.insert("LivingRoom", parent=h_first_entry_sec,
+    entry = menu_handler.insert("LivingRoom", parent=h_first_entry_third,
                             callback=partial(moveTo,
-                                                x=1.255550, y=0.113362, z=0,
-                                                R=-0.000007, P=0.003198, Y=1.980398,
+                                                x=1.407235, y=-0.186747, z=-0.001010,
+                                                R=-0.000008, P=0.003199, Y=-1.559985,
                                                 location='LivingRoom',
                                                 goal_publisher=goal_publisher))
-
-    # entry = menu_handler.insert("living room", parent=h_first_entry, callback=moveToLivingRoom)
 
     makeMenuMarker("marker1")
 

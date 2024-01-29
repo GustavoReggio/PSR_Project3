@@ -7,8 +7,10 @@ import rospy
 import cv2
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
-from time import ctime
 from cv_bridge import CvBridge
+
+
+
 
 def detectEmptyTable(msg):
     bridge = CvBridge()
@@ -44,17 +46,33 @@ def detectEmptyTable(msg):
             #   Debug   #
             #-----------#
 
-            if image == "../Images/top_camera/mesa_livre.png":
-                print("Mesa vazia = " + str(min_val))
+            #if image == "../Images/top_camera/mesa_livre.png":
+            #    print("Mesa vazia = " + str(min_val))
+            #if image == "../Images/top_camera/mesa_livre_cozinha.png":
+            #    print("Mesa vazia = " + str(min_val))
 
             #----------------------#
             #   Detection filter   #
             #----------------------#
 
-            # detect gynastic ball
-            if (image == "../Images/top_camera/mesa_livre.png" and min_val >= 80000000.0 and min_val <= 150000000.0):
-                cv2.putText(cv_image_copy, 'MESA LIVRE', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (230,216,173), 2, cv2.LINE_AA) 
-                cv2.rectangle(cv_image_copy, location, bottom_right, (230,216,173), 5)
+            # detect free table
+            if (image == "../Images/top_camera/mesa_livre.png" and min_val >= 60000000.0 and min_val <= 150000000.0):
+                cv2.putText(cv_image_copy, 'MESA LIVRE', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,255,0), 2, cv2.LINE_AA) 
+                cv2.rectangle(cv_image_copy, location, bottom_right, (0,255,0), 5)
+            # detect table ocupy
+            elif (image == "../Images/top_camera/mesa_livre.png" and min_val > 150000000.0 and min_val <= 400000000.0):
+                cv2.putText(cv_image_copy, 'MESA OCUPADA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
+                cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
+
+            # detect free table
+            if (image == "../Images/top_camera/mesa_livre_cozinha.png" and min_val >= 400000000.0 and min_val <= 500000000.0):
+                cv2.putText(cv_image_copy, 'MESA LIVRE', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,255,0), 2, cv2.LINE_AA) 
+                cv2.rectangle(cv_image_copy, location, bottom_right, (0,255,0), 5)
+            # detect table ocupy
+            elif ((image == "../Images/top_camera/mesa_livre_cozinha.png" and min_val > 150000000.0 and min_val < 400000000.0)
+                  or (image == "../Images/top_camera/mesa_livre_cozinha.png" and min_val > 500000000.0 and min_val < 700000000.0)):
+                cv2.putText(cv_image_copy, 'MESA OCUPADA', ((center_x - ((width // 2) // 2)), (center_y - (height // 2))), cv2.FONT_HERSHEY_SIMPLEX ,  1, (0,0,255), 2, cv2.LINE_AA) 
+                cv2.rectangle(cv_image_copy, location, bottom_right, (0,0,255), 5)
 
             cv2.imshow("Image", cv_image_copy)
             key = cv2.waitKey(1)
