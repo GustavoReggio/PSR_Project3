@@ -69,7 +69,7 @@ roslaunch project_bringup gazebo.launch
 roslaunch project_bringup bringup.launch
 ```
 
-### Lançar o Gazebo e Rviz:
+### Lançar o Gazebo, Rviz, Navigation e Localization:
 ```
 roslaunch project_bringup m_bringup.launch
 ```
