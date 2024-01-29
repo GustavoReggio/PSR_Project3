@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+#---------------#
+#   Libraries   #
+#---------------#
+
 import os
 import glob
 import numpy as np
@@ -10,16 +14,23 @@ from sensor_msgs.msg import Image
 from time import ctime
 from cv_bridge import CvBridge
 
+#---------------------------------#
+#   Function to detect object     #
+#---------------------------------#
+
 def detectObjectFront(msg):
 
     bridge = CvBridge()
 
+    # get image from topic
     cv_image = bridge.imgmsg_to_cv2(msg, "bgr8")
     
+    # search images
     file_pattern = os.path.join("../Images/front_camera", '*.png')
 
     png_files = glob.glob(file_pattern)
 
+    # go throught all images
     for image in png_files:
         template = cv2.imread(image)
         h, w, _ = template.shape
@@ -28,6 +39,7 @@ def detectObjectFront(msg):
 
         if image is not None:
             
+            # match stream with template
             result = cv2.matchTemplate(cv_image_copy, template, cv2.TM_SQDIFF)
             min_val, _, min_loc, _ = cv2.minMaxLoc(result)
             location = min_loc
@@ -113,8 +125,16 @@ def detectObjectFront(msg):
                 rospy.signal_shutdown("Exiting!!. Node shutdown.")
 
 def main():
-    topic_front = '/camera/rgb/image_raw'
+    #--------------------#
+    #   Initialization   #
+    #--------------------#
 
+    topic_top = '/camera/rgb/image_raw_up'
+
+
+    #---------------#
+    #   Execution   #
+    #---------------#
     # Setup ROS
     rospy.init_node('image_converter', anonymous=True)
     rospy.Subscriber(topic_front, Image, detectObjectFront)

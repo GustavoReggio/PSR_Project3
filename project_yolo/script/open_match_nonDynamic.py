@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+#---------------#
+#   Libraries   #
+#---------------#
+
 import numpy as np
 import rospy
 import cv2
@@ -7,12 +11,18 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
+#---------------------------------#
+#   Function to detect object     #
+#---------------------------------#
+
 def detectObject(msg):
 
     bridge = CvBridge()
 
+    # get image from topic
     cv_image = bridge.imgmsg_to_cv2(msg, "bgr8")
 
+    # search images
     templateBallGym = cv2.imread("../Images/front_camera/bola_azul_front_back.png")
     templateBallViolet = cv2.imread("../Images/front_camera/bola_roxa_front.png")
     templateBallRed = cv2.imread("../Images/front_camera/bola_vermelha_front.png")
@@ -21,6 +31,7 @@ def detectObject(msg):
     templatePersonFront = cv2.imread("../Images/front_camera/pessoa_front.png")
     templateLaptop = cv2.imread("../Images/front_camera/portatil_front.png")
 
+    # get measures
     hBallGym, wBallGym, _ = templateBallGym.shape
     hBallViolet, wBallViolet, _ = templateBallViolet.shape
     hBallRed, wBallRed, _ = templateBallRed.shape
@@ -31,8 +42,7 @@ def detectObject(msg):
 
     cv_image_copy = cv_image.copy()
 
-    cv_imageGray = cv2.cvtColor(cv_image_copy, cv2.COLOR_BGR2GRAY)
-
+    # match stream with template
     resultBallGym = cv2.matchTemplate(cv_image_copy, templateBallGym, cv2.TM_SQDIFF)
     resultBallViolet = cv2.matchTemplate(cv_image_copy, templateBallViolet, cv2.TM_SQDIFF)
     resultBallRed = cv2.matchTemplate(cv_image_copy, templateBallRed, cv2.TM_SQDIFF)
@@ -41,6 +51,7 @@ def detectObject(msg):
     resultPersonFront = cv2.matchTemplate(cv_image_copy, templatePersonFront, cv2.TM_SQDIFF)
     resultLaptop = cv2.matchTemplate(cv_image_copy, templateLaptop, cv2.TM_SQDIFF)
 
+    # get values to draw rectangle and conditions to detect object
     min_val_BallGym, _, min_loc_BallGym, _ = cv2.minMaxLoc(resultBallGym)
     min_val_BallViolet, _, min_loc_BallViolet, _ = cv2.minMaxLoc(resultBallViolet)
     min_val_BallRed, _, min_loc_BallRed, _ = cv2.minMaxLoc(resultBallRed)
@@ -48,6 +59,10 @@ def detectObject(msg):
     min_val_PersonBack, _, min_loc_PersonBack, _ = cv2.minMaxLoc(resultPersonBack)
     min_val_PersonFront, _, min_loc_PersonFront, _ = cv2.minMaxLoc(resultPersonFront)
     min_val_Laptop, _, min_loc_Laptop, _ = cv2.minMaxLoc(resultLaptop)
+
+    #
+    # 
+    #
 
     locationBallGym = min_loc_BallGym
     bottom_right_BallGym = (locationBallGym[0] + wBallGym, locationBallGym[1] + hBallGym)
